@@ -8,6 +8,7 @@ import { addToCart } from "../state";
 import { useNavigate } from "react-router-dom";
 
 const Item = ({ item, width }) => {
+  console.log(item)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [count, setCount] = useState(1);
@@ -38,7 +39,7 @@ const Item = ({ item, width }) => {
           alt={item.name}
           width="300px"
           height="400px"
-          src={`http://localhost:2000${url}`}
+          src={`http://localhost:1337${url}`}
           onClick={() => navigate(`/item/${item.id}`)}
           style={{ cursor: "pointer" }}
         />
