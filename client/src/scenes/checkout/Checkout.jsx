@@ -44,8 +44,8 @@ const Checkout = () => {
         count,
       })),
     };
-
-    const response = await fetch("http://localhost:2000/api/orders", {
+    console.log(requestBody.products)
+    const response = await fetch("http://localhost:1337/api/orders", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(requestBody),
