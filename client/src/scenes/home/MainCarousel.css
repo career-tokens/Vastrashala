@@ -1,0 +1,8 @@
+@media (min-width:600px){
+    .carousel-root{margin-top:48px;
+    }   
+}
+@media (max-width:599px){
+    .carousel-root{margin-top:2px;
+    }   
+}

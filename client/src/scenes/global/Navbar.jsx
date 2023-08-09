@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Badge, Box, IconButton } from "@mui/material";
+import { Badge, Box, IconButton, useMediaQuery } from "@mui/material";
 import {
   PersonOutline,
   ShoppingBagOutlined,
@@ -10,17 +10,27 @@ import { useNavigate } from "react-router-dom";
 import { shades } from "../../theme";
 import { setIsCartOpen } from "../../state";
 
+import vastrashalaLogo from "../../React App.png"; // Adjust the path accordingly
+
 function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
+  const isNonMobile = useMediaQuery("(min-width:600px)");
+
+  const iconButtonStyle = {
+    backgroundColor: "#010536",
+    color: "white",
+    transform: "scale(1.2)",
+    transition: "background-color 0.3s",
+  };
 
   return (
     <Box
       display="flex"
       alignItems="center"
       width="100%"
-      height="60px"
+      height={isNonMobile ? "115px" : "69px"}
       backgroundColor="rgba(255, 255, 255, 0.95)"
       color="black"
       position="fixed"
@@ -29,7 +39,7 @@ function Navbar() {
       zIndex="1"
     >
       <Box
-        width="80%"
+        width="96%"
         margin="auto"
         display="flex"
         justifyContent="space-between"
@@ -40,7 +50,18 @@ function Navbar() {
           sx={{ "&:hover": { cursor: "pointer" } }}
           color={shades.secondary[500]}
         >
-          ECOMMERCE
+          <img
+            src={vastrashalaLogo}
+            alt="Vastrashala Logo"
+            style={{
+              cursor: "pointer",
+              width: isNonMobile ? "300px" : "175px",
+              position: "absolute",
+              top: "2px",
+              left: "1vw",
+              borderRadius: "72px",
+            }}
+          />
         </Box>
         <Box
           display="flex"
@@ -48,10 +69,14 @@ function Navbar() {
           columnGap="20px"
           zIndex="2"
         >
-          <IconButton sx={{ color: "black" }}>
+          <IconButton sx={{ ...iconButtonStyle, "&:hover": { backgroundColor: "rgba(1, 5, 54, 0.8)" } }}>
             <SearchOutlined />
           </IconButton>
-          <IconButton sx={{ color: "black" }}>
+          <IconButton sx={{
+            ...iconButtonStyle,
+            display:isNonMobile?"flex":"none",
+            "&:hover": { backgroundColor: "rgba(1, 5, 54, 0.8)" }
+          }}>
             <PersonOutline />
           </IconButton>
           <Badge
@@ -70,12 +95,16 @@ function Navbar() {
           >
             <IconButton
               onClick={() => dispatch(setIsCartOpen({}))}
-              sx={{ color: "black" }}
+              sx={{ ...iconButtonStyle, "&:hover": { backgroundColor: "rgba(1, 5, 54, 0.8)" } }}
             >
               <ShoppingBagOutlined />
             </IconButton>
           </Badge>
-          <IconButton sx={{ color: "black" }}>
+          <IconButton sx={{
+            ...iconButtonStyle,
+            display:isNonMobile?"none":"flex",
+            "&:hover": { backgroundColor: "rgba(1, 5, 54, 0.8)" }
+          }}>
             <MenuOutlined />
           </IconButton>
         </Box>
