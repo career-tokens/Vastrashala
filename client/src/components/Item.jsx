@@ -26,7 +26,8 @@ const Item = ({ item, width }) => {
   } = image;
 
   return (
-    <Box width={width}>
+    <Box width={width} padding="10px" backgroundColor="lightblue" borderRadius="10px"
+    boxShadow="rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px">
       <Box
         position="relative"
         onMouseOver={() => setIsHovered(true)}
@@ -38,7 +39,7 @@ const Item = ({ item, width }) => {
           height="400px"
           src={`${url}`}
           onClick={() => navigate(`/item/${item.id}`)}
-          style={{ cursor: "pointer" }}
+          style={{ cursor: "pointer",borderRadius: "7px" }}
         />
         <Box
           display={isNonMobile?isHovered ? "block" : "none": "block"}
