@@ -22,15 +22,12 @@ function Footer() {
             variant="h4"
             fontWeight="bold"
             mb="30px"
-            color={shades.secondary[500]}
+            color="navy"
           >
-            ECOMMER
+            VASTRASHALA
           </Typography>
           <div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat
+          we believe that traditional Indian clothing is more than just a way to dress. It is a way to celebrate our culture and heritage. We are committed to providing our customers with the highest quality traditional Indian clothing, at affordable prices.We offer a wide variety of men and women traditional clothing, including sarees, kurtas, lehengas, and more. We also have a variety of accessories to complete your look, such as jewelry, handbags, and footwear.Our clothing is made from the finest materials, and is handcrafted by skilled artisans. 
           </div>
         </Box>
 
@@ -59,10 +56,10 @@ function Footer() {
             Contact Us
           </Typography>
           <Typography mb="30px">
-            50 north Whatever Blvd, Washington, DC 10501
+            xyzabc , India
           </Typography>
           <Typography mb="30px" sx={{ wordWrap: "break-word" }}>
-            Email: mredwardroh@gmail.com
+            Email: mainakcollege8967@gmail.com
           </Typography>
           <Typography mb="30px">(222)333-4444</Typography>
         </Box>

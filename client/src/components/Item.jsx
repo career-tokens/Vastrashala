@@ -76,6 +76,7 @@ const Item = ({ item, width }) => {
       </Box>
 
       <Box mt="3px">
+        <div style={{ display: "flex" , justifyContent:"space-between"}}>
         <Typography variant="subtitle2" sx={{backgroundColor:category === "newArrivals"
             ? "#4169e1"
             : category === "topRated"
@@ -93,8 +94,23 @@ const Item = ({ item, width }) => {
             .replace(/([A-Z])/g, " $1")
             .replace(/^./, (str) => str.toUpperCase())}
         </Typography>
-        <Typography>{name}</Typography>
-        <Typography fontWeight="bold">₹{price}</Typography>
+          <Typography fontWeight="bold"
+            fontSize="2.3vh"
+            color="white"
+            backgroundColor="black"
+            padding="3px"
+            paddingBottom="0.4px"
+            display="flex"
+            alignItems="center"
+            borderRadius="7px"
+          >₹{price}</Typography> 
+        </div>
+
+        <Typography
+          fontWeight="600"
+    fontSize="1.7vh"
+    marginTop="0.5vh">{name}</Typography>
+        
       </Box>
     </Box>
 
