@@ -26,8 +26,8 @@ const MainCarousel = () => {
       showThumbs={false}
       showIndicators={false}
       showStatus={false}
-      autoPlay={true}
-      transitionTime={2000}
+      autoPlay={false}
+      transitionTime={1500}
       renderArrowPrev={(onClickHandler, hasPrev, label) => (
         <IconButton
           onClick={onClickHandler}
