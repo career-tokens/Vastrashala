@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { IconButton, Box, Typography, useTheme, Button } from "@mui/material";
+import { IconButton, Box, Typography, useTheme, Button, useMediaQuery } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { shades } from "../theme";
@@ -8,6 +8,7 @@ import { addToCart } from "../state";
 import { useNavigate } from "react-router-dom";
 
 const Item = ({ item, width }) => {
+  const isNonMobile = useMediaQuery("(min-width:600px)");
   console.log(item)
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ const Item = ({ item, width }) => {
           style={{ cursor: "pointer" }}
         />
         <Box
-          display={isHovered ? "block" : "none"}
+          display={isNonMobile?isHovered ? "block" : "none": "block"}
           position="absolute"
           bottom="10%"
           left="0"
@@ -66,7 +67,7 @@ const Item = ({ item, width }) => {
               onClick={() => {
                 dispatch(addToCart({ item: { ...item, count } }));
               }}
-              sx={{ backgroundColor: shades.primary[300], color: "white" }}
+              sx={{ backgroundColor: "green", color: "white" }}
             >
               Add to Cart
             </Button>
@@ -75,15 +76,28 @@ const Item = ({ item, width }) => {
       </Box>
 
       <Box mt="3px">
-        <Typography variant="subtitle2" color={neutral.dark}>
+        <Typography variant="subtitle2" sx={{backgroundColor:category === "newArrivals"
+            ? "#4169e1"
+            : category === "topRated"
+            ? "#0047ab"
+            : category === "bestSellers"
+            ? "#000080"
+              : neutral.dark,
+          color: "white",
+          width: "fit-content",
+          padding: "4px",
+          borderRadius: "6px",
+          fontSize: "2vh"
+        }} >
           {category&&category
             .replace(/([A-Z])/g, " $1")
             .replace(/^./, (str) => str.toUpperCase())}
         </Typography>
         <Typography>{name}</Typography>
-        <Typography fontWeight="bold">${price}</Typography>
+        <Typography fontWeight="bold">₹{price}</Typography>
       </Box>
     </Box>
+
   );
 };
 

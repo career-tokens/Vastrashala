@@ -44,26 +44,31 @@ const ShoppingList = () => {
   return (
     <Box width="80%" margin="3vh auto">
       <Typography variant="h3" textAlign="center">
-        Our Featured <b>Products</b>
+        Our Featured <b style={{color:"#034694"}}>Products</b>
       </Typography>
       <Tabs
-        textColor="primary"
-        indicatorColor="primary"
         value={value}
         onChange={handleChange}
         centered
-        TabIndicatorProps={{ sx: { display: breakPoint ? "block" : "none" } }}
+        TabIndicatorProps={{ sx: { display: breakPoint ? "block" : "none", backgroundColor:"blue" } }}
         sx={{
+          "& button": {
+            color: "black",
+            fontSize:"1.8vh",
+          },
+          "& button.Mui-selected": {
+            color: "blue"
+          },
           m: "25px",
           "& .MuiTabs-flexContainer": {
             flexWrap: "wrap",
           },
         }}
       >
-        <Tab label="ALL" value="all" />
-        <Tab label="NEW ARRIVALS" value="newArrivals" />
-        <Tab label="BEST SELLERS" value="bestSellers" />
-        <Tab label="TOP RATED" value="topRated" />
+        <Tab label="ALL" value="all" textColor="black" fontSize="1.8vh" />
+        <Tab label="NEW ARRIVALS" value="newArrivals" textColor="black" fontSize="1.8vh" />
+        <Tab label="BEST SELLERS" value="bestSellers" textColor="black" fontSize="1.8vh" />
+        <Tab label="TOP RATED" value="topRated" textColor="black" fontSize="1.8vh" />
       </Tabs>
       <Box
         margin="0 auto"
@@ -95,3 +100,4 @@ const ShoppingList = () => {
 };
 
 export default ShoppingList;
+//tab indicator means the flashing light behind the selected tab on selecting it

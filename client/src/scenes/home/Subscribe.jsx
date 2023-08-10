@@ -7,12 +7,12 @@ const Subscribe = () => {
 
   return (
     <Box width="80%" margin="80px auto" textAlign="center">
-      <IconButton>
+      <IconButton sx={{color:"mediumblue"}}>
         <MarkEmailReadOutlinedIcon fontSize="large" />
       </IconButton>
-      <Typography variant="h3">Subscribe To Our Newsletter</Typography>
+      <Typography variant="h3" color="#6a5acd">Subscribe To Our Newsletter</Typography>
       <Typography>
-        and receive $20 coupon for your first order when you checkout
+        and receive <b style={{ color: "green" ,fontWeight:"900",fontSize:"3vh"}}>₹20</b> coupon for your first order when you checkout
       </Typography>
       <Box
         p="2px 4px"
