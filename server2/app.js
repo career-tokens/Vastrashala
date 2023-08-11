@@ -21,6 +21,7 @@ app.post('/api/create-stripe-session', async (req, res) => {
         payment_method_types: ["card"],
         customer_email: "test@example.com", // Set a default email or get it from the client-side
         mode: "payment",
+        allow_promotion_codes: true,
         success_url: "http://localhost:3000/checkout/success", // Adjust the URL accordingly
         cancel_url: "http://localhost:3000", // Adjust the URL accordingly
         line_items: lineItems,
