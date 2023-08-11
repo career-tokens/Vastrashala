@@ -26,7 +26,7 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
               product_data: {
                 name: item.name,
               },
-              unit_amount: item.price,
+              unit_amount: item.price*100,
             },
             quantity: product.count,
           };
@@ -39,7 +39,7 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ lineItems }),
+        body: JSON.stringify({ lineItems,email,userName }),
       });
 
       const responseData = await response.json();

@@ -13,13 +13,13 @@ app.use(
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 
 app.post('/api/create-stripe-session', async (req, res) => {
-    const { lineItems } = req.body;
+    const { lineItems,email,userName } = req.body;
   
     try {
       // Create a stripe session
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
-        customer_email: "test@example.com", // Set a default email or get it from the client-side
+        customer_email: email, // Set a default email or get it from the client-side
         mode: "payment",
         allow_promotion_codes: true,
         success_url: "http://localhost:3000/checkout/success", // Adjust the URL accordingly
