@@ -1,0 +1,5 @@
+@keyframes  react-spinners-MoonLoader-moon{
+    100% {
+    transform: rotate(360deg);
+}
+}

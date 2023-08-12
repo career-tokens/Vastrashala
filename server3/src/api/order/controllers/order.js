@@ -34,7 +34,7 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
       );
 
       // Send lineItems to the backend server for stripe session creation
-      const response = await fetch('https://vastra-backend-node.onrender.com/api/create-stripe-session', {
+      const response = await fetch('http://localhost:8080/api/create-stripe-session', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

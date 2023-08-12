@@ -1,17 +1,20 @@
 import { useSelector } from "react-redux";
 import { Box, Button, Stepper, Step, StepLabel } from "@mui/material";
 import { Formik } from "formik";
-import { useState } from "react";
+import { useEffect, useState,CSSProperties } from "react";
 import * as yup from "yup";
 import { shades } from "../../theme";
 import Payment from "./Payment";
 import Shipping from "./Shipping";
 import { loadStripe } from "@stripe/stripe-js";
+import MoonLoader from "react-spinners/MoonLoader"
+import "./Checkout.css"
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_API_KEY);
 
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const [isFetchingStripe, setIsFetchingStripe] = useState(false);//for spinner and modal
   const cart = useSelector((state) => state.cart.cart);
   const isFirstStep = activeStep === 0;
   const isSecondStep = activeStep === 1;
@@ -35,6 +38,7 @@ const Checkout = () => {
   };
 
   async function makePayment(values) {
+    setIsFetchingStripe(true);
     const stripe = await stripePromise;
     const requestBody = {
       userName: [values.firstName, values.lastName].join(" "),
@@ -45,7 +49,7 @@ const Checkout = () => {
       })),
     };
     console.log(requestBody.products)
-    const response = await fetch("https://vastra-backend-strapi.onrender.com/api/orders", {
+    const response = await fetch("http://localhost:1337/api/orders", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(requestBody),
@@ -55,9 +59,20 @@ const Checkout = () => {
       sessionId: session.id,
     });
   }
+  useEffect(() => {
+    const handleStripeRedirect = () => {
+      setIsFetchingStripe(false);
+    };
+
+    window.addEventListener("popstate", handleStripeRedirect);
+
+    return () => {
+      window.removeEventListener("popstate", handleStripeRedirect);
+    };
+  }, []);
 
   return (
-    <Box width="80%" m="100px auto">
+<Box width="80%" m="100px auto">
       <Stepper activeStep={activeStep} sx={{ m: "20px 0" }}>
         <Step>
           <StepLabel>Billing</StepLabel>
@@ -140,6 +155,59 @@ const Checkout = () => {
           )}
         </Formik>
       </Box>
+      {/* Modal with spinner */}
+      {isFetchingStripe && (
+        <Box
+          position="fixed"
+          top={0}
+          left={0}
+          right={0}
+          bottom={0}
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+          backgroundColor="rgba(0, 0, 0, 0.3)"
+          zIndex={9999}
+          textAlign="center"
+        >
+<span
+      style={{
+        display: 'inherit',
+        position: 'relative',
+        width: '77.1429px',
+        height: '77.1429px',
+        animation: '0.6s linear 0s infinite normal forwards running react-spinners-MoonLoader-moon',
+              opacity: '1',
+        marginBottom:"1vh"
+      }}
+    >
+      <span
+        style={{
+          width: '8.57143px',
+          height: '8.57143px',
+          borderRadius: '100%',
+          backgroundColor: '#123524',
+          position: 'absolute',
+          top: '25.7143px',
+                animation: '1s linear 0s infinite normal forwards running react-spinners-MoonLoader-moon',
+          zIndex:"1"
+        }}
+      ></span>
+      <span
+        style={{
+          width: '60px',
+          height: '60px',
+          borderRadius: '100%',
+          border: '8.57143px solid rgb(63, 255, 0)',
+          boxSizing: 'content-box',
+          position: 'absolute'
+        }}
+      ></span>
+    </span>
+          <Box ml={2} color= "white" fontSize="3vh">Your checkout is being prepared, please wait...</Box>
+        </Box>
+      )}
     </Box>
   );
 };

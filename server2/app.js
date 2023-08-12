@@ -6,7 +6,7 @@ const cors = require("cors")
 app.use(express.json())
 app.use(
   cors({
-    origin: "https://vastra-backend-strapi.onrender.com",
+    origin: "http://localhost:1337",
   })
 )
 
