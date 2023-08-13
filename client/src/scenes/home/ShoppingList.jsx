@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setItems } from "../../state";
 
 const ShoppingList = () => {
+  console.log(process.env.REACT_APP_STYTCH_PUBLIC_TOKEN)
   const dispatch = useDispatch();
   const [value, setValue] = useState("all");
   const items = useSelector((state) => state.cart.items);

@@ -1,15 +1,21 @@
 require("dotenv").config()
-
+const mongoose = require("mongoose");
 const express = require("express")
 const app = express()
+
+const userRouter = require("./routes/UserRoutes");
+
+
 const cors = require("cors")
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
+
 app.use(
   cors({
-    origin: "http://localhost:1337",
+    origin: [ 'http://localhost:3000', 'http://localhost:1337'],
   })
 )
-
+//stripe-ingg
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 
 app.post('/api/create-stripe-session', async (req, res) => {
@@ -33,7 +39,13 @@ app.post('/api/create-stripe-session', async (req, res) => {
       console.error("Error creating stripe session:", error);
       res.status(500).json({ error: "There was an error creating the stripe session." });
     }
-  });
+});
+  
+
+//user/admin panel
+
+app.use("/api/users", userRouter);
+mongoose.connect(process.env.MONGODB_URI);
   
   app.listen(8080, () => {
     console.log('Express server listening on port 8080');

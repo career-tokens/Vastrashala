@@ -8,6 +8,11 @@ import CartMenu from "./scenes/global/CartMenu";
 import Checkout from "./scenes/checkout/Checkout";
 import Confirmation from "./scenes/checkout/Confirmation";
 
+import { useStytchUser } from "@stytch/react";//for login
+import Profile from "./scenes/login/Profile";
+import Login from "./scenes/login/Login";
+
+
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
@@ -19,16 +24,19 @@ const ScrollToTop = () => {
 };
 
 function App() {
+
+  const { user } = useStytchUser();
   return (
     <div className="app">
       <BrowserRouter>
         <Navbar />
         <ScrollToTop />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="item/:itemId" element={<ItemDetails />} />
-          <Route path="checkout" element={<Checkout />} />
-          <Route path="checkout/success" element={<Confirmation />} />
+          <Route path="/logsi" element={<>{user ? <Profile /> : <Login/>}</>} />
+          <Route path="/" element={<>{user ? <Home /> : <Login/>}</>} />
+          <Route path="item/:itemId" element={<>{user ? <ItemDetails /> : <Login/>}</>} />
+          <Route path="checkout" element={<>{user ? <Checkout/> : <Login/>}</>} />
+          <Route path="checkout/success" element={<>{user ? <Confirmation/>: <Login/>}</>} />
         </Routes>
         <CartMenu />
         <Footer />
