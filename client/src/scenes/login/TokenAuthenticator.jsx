@@ -15,26 +15,35 @@ const TokenAuthenticator = ({ children }) => {
   const { user } = useStytchUser();
 
   useEffect(() => {
-    // If the stytch SDK is available, and there is no existing user check for a token value in query params
+    const handleTokenAuthentication = async (token, tokenType) => {
+      try {
+        if (tokenType === "magic_links") {
+          await stytch.magicLinks.authenticate(token, {
+            session_duration_minutes: 60,
+          });
+        } else if (tokenType === "oauth") {
+          await stytch.oauth.authenticate(token, {
+            session_duration_minutes: 60,
+          });
+        }
+      } catch (error) {
+        // Handle authentication error here
+        console.error("Authentication error:", error);
+        // You might want to handle the error in a way that makes sense for your app
+      }
+    };
+
     if (stytch && !user) {
       const queryParams = new URLSearchParams(window.location.search);
       const token = queryParams.get("token");
       const tokenType = queryParams.get("stytch_token_type");
 
-      // If a token is found, authenticate it with the appropriate method
       if (token && tokenType) {
-        if (tokenType === "magic_links") {
-          stytch.magicLinks.authenticate(token, {
-            session_duration_minutes: 60,
-          });
-        } else if (tokenType === "oauth") {
-          stytch.oauth.authenticate(token, {
-            session_duration_minutes: 60,
-          });
-        }
+        handleTokenAuthentication(token, tokenType);
       }
     }
   }, [stytch, user]);
+
   return children;
 };
 
