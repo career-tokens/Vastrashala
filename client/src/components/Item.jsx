@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 const Item = ({ item, width }) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
-  console.log(item)
+  //console.log(item)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [count, setCount] = useState(1);

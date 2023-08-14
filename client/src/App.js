@@ -32,7 +32,6 @@ function App() {
         <Navbar />
         <ScrollToTop />
         <Routes>
-          <Route path="/logsi" element={<>{user ? <Profile /> : <Login/>}</>} />
           <Route path="/" element={<>{user ? <Home /> : <Login/>}</>} />
           <Route path="item/:itemId" element={<>{user ? <ItemDetails /> : <Login/>}</>} />
           <Route path="checkout" element={<>{user ? <Checkout/> : <Login/>}</>} />
