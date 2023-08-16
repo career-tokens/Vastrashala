@@ -9,10 +9,14 @@ import Shipping from "./Shipping";
 import { loadStripe } from "@stripe/stripe-js";
 import MoonLoader from "react-spinners/MoonLoader"
 import "./Checkout.css"
+import { useStytchUser } from "@stytch/react";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_API_KEY);
 
 const Checkout = () => {
+  const { user } = useStytchUser();
+  const email = user.emails[0].email;
+
   const [activeStep, setActiveStep] = useState(0);
   const [isFetchingStripe, setIsFetchingStripe] = useState(false);//for spinner and modal
   const cart = useSelector((state) => state.cart.cart);
@@ -42,7 +46,7 @@ const Checkout = () => {
     const stripe = await stripePromise;
     const requestBody = {
       userName: [values.firstName, values.lastName].join(" "),
-      email: values.email,
+      email: email,
       products: cart.map(({ id, count }) => ({
         id,
         count,
@@ -73,7 +77,7 @@ const Checkout = () => {
   }, []);
 
   return (
-<Box width="80%" m="100px auto">
+<Box width="80%" m="100px auto" marginTop="20vh">
       <Stepper activeStep={activeStep} sx={{ m: "20px 0" }}>
         <Step>
           <StepLabel>Billing</StepLabel>
@@ -285,7 +289,6 @@ const checkoutSchema = [
     }),
   }),
   yup.object().shape({
-    email: yup.string().required("required"),
     phoneNumber: yup.string().required("required"),
   }),
 ];

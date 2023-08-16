@@ -1,7 +1,10 @@
 import { Box, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
+import { useStytchUser } from "@stytch/react";
 
 const Payment = ({ values, touched, errors, handleBlur, handleChange }) => {
+  const { user } = useStytchUser();
+  const email = user.emails[0].email;
   return (
     <Box m="30px 0">
       {/* CONTACT INFO */}
@@ -14,8 +17,8 @@ const Payment = ({ values, touched, errors, handleBlur, handleChange }) => {
           type="text"
           label="Email"
           onBlur={handleBlur}
-          onChange={handleChange}
-          value={values.email}
+          aria-readonly="true"
+          value={email}
           name="email"
           error={!!touched.email && !!errors.email}
           helperText={touched.email && errors.email}

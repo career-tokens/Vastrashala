@@ -11,10 +11,15 @@ const Confirmation = () => {
   async function updateUserBody() {
     const response = await fetch(`http://localhost:8080/api/users/${email}`);
     const data = await response.json();
+    if (data.data.body) {
+      for (const element of data.data.body) {
+        data.data.change.push(element);
+      }
+    }
     const body = {
       _id: data.data._id,
       title: data.data._id,
-      body: data.data.body+data.data.change,
+      body: data.data.change,
       change:null,
       lastCreatedAt: Date.now(),
       
