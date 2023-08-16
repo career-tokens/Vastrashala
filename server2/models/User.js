@@ -5,7 +5,7 @@ const UserSchema = new Schema({
   _id:String,
   title: String,
   body: [String],
-  image: [String],
+  change: [String],
   lastCreatedAt: {
     type: Date,
     default: Date.now,

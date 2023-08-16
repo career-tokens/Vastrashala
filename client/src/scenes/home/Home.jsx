@@ -20,7 +20,7 @@ const getRequest = async () => {
   const response = await fetch(url);
   if (response.status === 200) {
     const data = await response.json();
-    //console.log(data.data)
+    console.log(data.data)
     if (!data.data ) {
       // The user does not exist, so create a new one.
       const postRequest = async () => {
@@ -28,7 +28,7 @@ const getRequest = async () => {
           _id: _id,
           title: _id,
           body: null,
-          image: null,
+          change: null,
           lastCreatedAt: Date.now(),
         };
         const response = await fetch("http://localhost:8080/api/users/", {
