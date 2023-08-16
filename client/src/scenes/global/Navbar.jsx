@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Badge, Box, IconButton, useMediaQuery } from "@mui/material";
+import { Badge, Box, ClickAwayListener, Grow, IconButton, MenuList, Paper, Popper, useMediaQuery } from "@mui/material";
 import {
   PersonOutline,
   ShoppingBagOutlined,
@@ -24,7 +24,7 @@ import Logout from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { useStytch, useStytchSession, useStytchUser } from "@stytch/react";//for logout
 
@@ -35,17 +35,10 @@ function Navbar() {
   const cart = useSelector((state) => state.cart.cart);
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+
   const handleLogout = () => {
     stytch.session.revoke();
-    setAnchorEl(null);
+    
   }
 
   const iconButtonStyle = {
@@ -61,6 +54,39 @@ function Navbar() {
   // Get the Stytch Session object if available
   const { session } = useStytchSession();
 
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef(null);
+
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
+
+  const handleClose = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  function handleListKeyDown(event) {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      setOpen(false);
+    } else if (event.key === 'Escape') {
+      setOpen(false);
+    }
+  }
+
+  // return focus to the button when we transitioned from !open -> open
+  const prevOpen = useRef(open);
+  useEffect(() => {
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current.focus();
+    }
+
+    prevOpen.current = open;
+  }, [open]);
   return (
     <Box
       display="flex"
@@ -109,56 +135,44 @@ function Navbar() {
             <SearchOutlined />
           </IconButton>
           <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-<Tooltip title="Account settings">
   <IconButton
-    onClick={handleClick}
     sx={{
       ...iconButtonStyle,
       "&:hover": { backgroundColor: "rgba(1, 5, 54, 0.8)" }
     }}
-    aria-controls={open ? 'account-menu' : undefined}
-    aria-haspopup="true"
+    ref={anchorRef}
+    id="composition-button"
+    aria-controls={open ? 'composition-menu' : undefined}
     aria-expanded={open ? 'true' : undefined}
+    aria-haspopup="true"
+    onClick={handleToggle}
   >
     <PersonOutline />
   </IconButton>
-</Tooltip>
-</Box>
-<Menu
-anchorEl={anchorEl}
-id="account-menu"
-open={open}
-onClose={handleClose}
-onClick={handleClose}
-PaperProps={{
-  elevation: 0,
-  sx: {
-    overflow: 'visible',
-    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-    mt: 1.5,
-    '& .MuiAvatar-root': {
-      width: 32,
-      height: 32,
-      ml: -0.5,
-      mr: 1,
-    },
-    '&:before': {
-      content: '""',
-      display: 'block',
-      position: 'absolute',
-      top: 0,
-      right: 14,
-      width: 10,
-      height: 10,
-      bgcolor: 'background.paper',
-      transform: 'translateY(-50%) rotate(45deg)',
-      zIndex: 0,
-    },
-  },
-}}
-transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
->
+  <Popper
+          open={open}
+          anchorEl={anchorRef.current}
+          role={undefined}
+          placement="bottom-start"
+          transition
+          disablePortal
+        >
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              style={{
+                transformOrigin:
+                  placement === 'bottom-start' ? 'left top' : 'left bottom',
+              }}
+            >
+              <Paper>
+                    <ClickAwayListener onClickAway={handleClose}>
+                    <MenuList
+                    autoFocusItem={open}
+                    id="composition-menu"
+                    aria-labelledby="composition-button"
+                    onKeyDown={handleListKeyDown}
+                  >
 <MenuItem onClick={handleClose} sx={{fontSize:"2.5vmin"}}>
   <ListItemIcon >
      <AccountCircleIcon sx={{fontSize:"3.5vmin"}} />
@@ -171,7 +185,13 @@ anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
   </ListItemIcon>
   Logout
 </MenuItem>
-</Menu>
+</MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
+        </Box>
           <Badge
             badgeContent={cart.length}
             color="secondary"

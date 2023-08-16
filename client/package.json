@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@stytch/react": "^0.5.0",
-    "@stytch/vanilla-js": "^0.5.5",
+    "@chakra-ui/react": "^2.8.0",
     "@emailjs/browser": "^3.11.0",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -13,6 +12,8 @@
     "@reduxjs/toolkit": "^1.8.5",
     "@stripe/react-stripe-js": "^1.10.0",
     "@stripe/stripe-js": "^1.35.0",
+    "@stytch/react": "^0.5.0",
+    "@stytch/vanilla-js": "^0.5.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
