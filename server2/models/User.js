@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   _id:String,
   title: String,
-  body: [String],
-  change: [String],
+  body: Array,
+  change: Array,
   lastCreatedAt: {
     type: Date,
     default: Date.now,

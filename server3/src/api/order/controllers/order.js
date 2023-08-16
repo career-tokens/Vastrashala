@@ -44,20 +44,25 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
 
       const responseData = await response.json();
 
-      //preparing the checked items for standby in case the buyout is successful
-      const response2 = await fetch(`http://localhost:8080/api/users/${email}`);
-      const data = await response2.json();
-      const body = {
-        ...data,
-        change: lineItems,
-      };
-      await fetch(`http://localhost:8080/api/users/${email}`, {
-        method: "PUT",
-        body: JSON.stringify(body),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+          //preparing the checked items for standby in case the buyout is successful
+          const response2 = await fetch(`http://localhost:8080/api/users/${email}`);
+          const data = await response2.json();
+          const body = {
+            _id: data.data._id,
+            title: data.data._id,
+            body: data.data.body,
+            change:lineItems,
+            lastCreatedAt: Date.now(),
+            
+    };
+    console.log(body)
+          await fetch(`http://localhost:8080/api/users/${email}`, {
+            method: "PUT",
+            body: JSON.stringify(body),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
       
       // Create the item
       await strapi

@@ -12,9 +12,13 @@ const Confirmation = () => {
     const response = await fetch(`http://localhost:8080/api/users/${email}`);
     const data = await response.json();
     const body = {
-      ...data,
-      body: data.data.body + data.data.change,
-    };
+      _id: data.data._id,
+      title: data.data._id,
+      body: data.data.body+data.data.change,
+      change:null,
+      lastCreatedAt: Date.now(),
+      
+};
     await fetch(`http://localhost:8080/api/users/${email}`, {
       method: "PUT",
       body: JSON.stringify(body),
