@@ -9,7 +9,7 @@ const UserAccount = () => {
 
     const [userItems, setUserItems] = useState([]);
     const [items, setItems] = useState([]);
-    const [data,setData] = useState(null);
+    const [data,setData] = useState([]);
 
 //for items user has already bought
     async function getUserItems() {
@@ -17,6 +17,7 @@ const UserAccount = () => {
         const response = await fetch(url);
         const data = await response.json();
         const itemIds = data.data.body; 
+        setData(itemIds);
   
   const items = [];
 
@@ -85,7 +86,7 @@ const UserAccount = () => {
                   rowGap="2.5vh"
           justifyContent="space-between"
         >
-          {items.slice(0, 4).map((item, i) => (
+          {items.filter((item, index) => !data.includes(index)).map((item, i) => (
             <Item key={`${item.name}-${i}`} item={item} />
           ))}
         </Box>
