@@ -11,6 +11,7 @@ import Confirmation from "./scenes/checkout/Confirmation";
 import { useStytchUser } from "@stytch/react";//for login
 import Profile from "./scenes/login/Profile";
 import Login from "./scenes/login/Login";
+import UserAccount from "./scenes/userAccount/UserAccount";
 
 
 const ScrollToTop = () => {
@@ -32,7 +33,8 @@ function App() {
         <Navbar />
         <ScrollToTop />
         <Routes>
-          <Route path="/" element={<>{user ? <Home /> : <Login/>}</>} />
+          <Route path="/" element={<>{user ? <Home /> : <Login />}</>} />
+          <Route path="/useraccount" element={<>{user ? <UserAccount /> : <Login/>}</>} />
           <Route path="item/:itemId" element={<>{user ? <ItemDetails /> : <Login/>}</>} />
           <Route path="checkout" element={<>{user ? <Checkout/> : <Login/>}</>} />
           <Route path="checkout/success" element={<>{user ? <Confirmation/>: <Login/>}</>} />

@@ -7,11 +7,13 @@
 const { createCoreController } = require("@strapi/strapi").factories;
 
 // Declare lineItems as a global variable outside the create function
-let lineItems;
+let lineItems, productIds;
 
 module.exports = createCoreController("api::order.order", ({ strapi }) => ({
   async create(ctx) {
     const { products, userName, email } = ctx.request.body;
+     productIds = products.map(product => product.id);
+
     try {
       // Retrieve item information
       lineItems = await Promise.all(
@@ -51,7 +53,7 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
             _id: data.data._id,
             title: data.data._id,
             body: data.data.body,
-            change:lineItems,
+            change:productIds,
             lastCreatedAt: Date.now(),
             
     };
