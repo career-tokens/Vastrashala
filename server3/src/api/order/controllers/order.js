@@ -36,7 +36,7 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
       );
 
       // Send lineItems to the backend server for stripe session creation
-      const response = await fetch('http://localhost:8080/api/create-stripe-session', {
+      const response = await fetch('https://vastra-backend-node.onrender.com/api/create-stripe-session', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
       const responseData = await response.json();
 
           //preparing the checked items for standby in case the buyout is successful
-          const response2 = await fetch(`http://localhost:8080/api/users/${email}`);
+          const response2 = await fetch(`https://vastra-backend-node.onrender.com/api/users/${email}`);
           const data = await response2.json();
           const body = {
             _id: data.data._id,
@@ -57,8 +57,8 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
             lastCreatedAt: Date.now(),
             
     };
-    console.log(body)
-          await fetch(`http://localhost:8080/api/users/${email}`, {
+    //console.log(body)
+          await fetch(`https://vastra-backend-node.onrender.com/api/users/${email}`, {
             method: "PUT",
             body: JSON.stringify(body),
             headers: {

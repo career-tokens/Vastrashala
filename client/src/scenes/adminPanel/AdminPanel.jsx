@@ -5,12 +5,12 @@ import Item from '../../components/Item';
 
 
 const AdminPanel = () => {
-  const mainUrl = 'http://localhost:8080/api/users';
+  const mainUrl = 'https://vastra-backend-node.onrender.com/api/users';
 
   const [resultArray, setResultArray] = useState([]);
 
   const fetchItemsWithImages = async (itemId) => {
-    const itemUrl = `http://localhost:1337/api/items/${itemId}?populate=image`;
+    const itemUrl = `https://vastra-backend-strapi.onrender.com/api/items/${itemId}?populate=image`;
     const response = await fetch(itemUrl);
     const json = await response.json();
     return json;

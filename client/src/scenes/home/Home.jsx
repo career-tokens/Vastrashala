@@ -14,7 +14,7 @@ function Home() {
   const { session } = useStytchSession();
 
   //below we r adding a new user or updating the existing user's last visit to the platform
-const url = `http://localhost:8080/api/users/${_id}`;
+const url = `https://vastra-backend-node.onrender.com/api/users/${_id}`;
 
 const getRequest = async () => {
   const response = await fetch(url);
@@ -31,7 +31,7 @@ const getRequest = async () => {
           change: null,
           lastCreatedAt: Date.now(),
         };
-        const response = await fetch("http://localhost:8080/api/users/", {
+        const response = await fetch("https://vastra-backend-node.onrender.com/api/users/", {
           method: "POST",
           body: JSON.stringify(body),
           headers: {

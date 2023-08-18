@@ -13,7 +13,7 @@ const UserAccount = () => {
 
 //for items user has already bought
     async function getUserItems() {
-        const url = `http://localhost:8080/api/users/${email}`;
+        const url = `https://vastra-backend-node.onrender.com/api/users/${email}`;
         const response = await fetch(url);
         const data = await response.json();
         const itemIds = data.data.body; 
@@ -23,7 +23,7 @@ const UserAccount = () => {
 
   for (const itemId of itemIds) {
     const itemResponse = await fetch(
-      `http://localhost:1337/api/items/${itemId}?populate=image`,
+      `https://vastra-backend-strapi.onrender.com/api/items/${itemId}?populate=image`,
       {
         method: "GET",
       }
@@ -38,7 +38,7 @@ const UserAccount = () => {
     //for also check items
     async function getItems() {
         const items = await fetch(
-          `http://localhost:1337/api/items?populate=image`,
+          `https://vastra-backend-strapi.onrender.com/api/items?populate=image`,
           {
             method: "GET",
           }

@@ -9,7 +9,7 @@ const Confirmation = () => {
   const { user } = useStytchUser();
   const email = user.emails[0].email;
   async function updateUserBody() {
-    const response = await fetch(`http://localhost:8080/api/users/${email}`);
+    const response = await fetch(`https://vastra-backend-node.onrender.com/api/users/${email}`);
     const data = await response.json();
     if (data.data.body) {
       for (const element of data.data.body) {
@@ -24,7 +24,7 @@ const Confirmation = () => {
       lastCreatedAt: Date.now(),
       
 };
-    await fetch(`http://localhost:8080/api/users/${email}`, {
+    await fetch(`https://vastra-backend-node.onrender.com/api/users/${email}`, {
       method: "PUT",
       body: JSON.stringify(body),
       headers: {

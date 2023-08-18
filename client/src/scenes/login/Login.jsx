@@ -24,16 +24,16 @@ const Login = () => {
   const config = {
     products: [Products.emailMagicLinks, Products.oauth],
     emailMagicLinksOptions: {
-      loginRedirectURL: "http://localhost:3000",
+      loginRedirectURL: "e-commerce-b4f2toq0t-mainakkaniam.vercel.app",
       loginExpirationMinutes: 60,
-      signupRedirectURL: "http://localhost:3000",
+      signupRedirectURL: "e-commerce-b4f2toq0t-mainakkaniam.vercel.app",
       signupExpirationMinutes: 60,
     },
     oauthOptions: {
       providers: [{ type: "google" }],
-      loginRedirectURL: "http://localhost:3000",
+      loginRedirectURL: "e-commerce-b4f2toq0t-mainakkaniam.vercel.app",
       loginExpirationMinutes: 60,
-      signupRedirectURL: "http://localhost:3000",
+      signupRedirectURL: "e-commerce-b4f2toq0t-mainakkaniam.vercel.app",
       signupExpirationMinutes: 60,
     },
   };

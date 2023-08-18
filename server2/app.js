@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(
   cors({
-    origin: [ 'http://localhost:3000', 'http://localhost:1337'],
+    origin: [ 'e-commerce-b4f2toq0t-mainakkaniam.vercel.app', 'https://vastra-backend-node.onrender.com'],
   })
 )
 //stripe-ingg
