@@ -12,21 +12,17 @@ import { setIsCartOpen } from "../../state";
 
 import vastrashalaLogo from "../../React App.png"; // Adjust the path accordingly
 
-import Menu from '@mui/material/Menu';
+
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
-import Typography from '@mui/material/Typography';
-import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import MonitorIcon from '@mui/icons-material/Monitor';
 
 
 import { useEffect, useRef, useState } from "react";
 
-import { useStytch, useStytchSession, useStytchUser } from "@stytch/react";//for logout
+import { useStytch } from "@stytch/react";//for logout
 
 
 function Navbar() {
@@ -35,11 +31,6 @@ function Navbar() {
   const cart = useSelector((state) => state.cart.cart);
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-
-  const handleLogout = () => {
-    stytch.session.revoke();
-    
-  }
 
   const iconButtonStyle = {
     backgroundColor: "#010536",
@@ -50,9 +41,6 @@ function Navbar() {
 
   const stytch = useStytch();
   // Get the Stytch User object if available
-  const { user } = useStytchUser();
-  // Get the Stytch Session object if available
-  const { session } = useStytchSession();
 
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
@@ -60,6 +48,18 @@ function Navbar() {
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
+
+  const handleLogout = () => {
+    stytch.session.revoke();
+  }
+
+  const handleAccount = () => {
+    navigate("/userAccount");
+  }
+
+  const handleAdmin= () => {
+    navigate("/adminpanel");
+  }
 
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
@@ -173,11 +173,17 @@ function Navbar() {
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
                   >
-<MenuItem onClick={handleClose} sx={{fontSize:"2.5vmin"}}>
+<MenuItem onClick={handleAccount} sx={{fontSize:"2.5vmin"}}>
   <ListItemIcon >
      <AccountCircleIcon sx={{fontSize:"3.5vmin"}} />
   </ListItemIcon>
   Your Account
+  </MenuItem>
+  <MenuItem onClick={handleAdmin} sx={{fontSize:"2.5vmin"}}>
+  <ListItemIcon>
+    <MonitorIcon sx={{fontSize:"3.5vmin"}} />
+  </ListItemIcon>
+  Admin Panel
 </MenuItem>
 <MenuItem onClick={handleLogout} sx={{fontSize:"2.5vmin"}}>
   <ListItemIcon>
