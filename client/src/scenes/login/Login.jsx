@@ -24,16 +24,16 @@ const Login = () => {
   const config = {
     products: [Products.emailMagicLinks, Products.oauth],
     emailMagicLinksOptions: {
-      loginRedirectURL: "e-commerce-b4f2toq0t-mainakkaniam.vercel.app",
+      loginRedirectURL: "https://e-commerce-amber-one.vercel.app",
       loginExpirationMinutes: 60,
-      signupRedirectURL: "e-commerce-b4f2toq0t-mainakkaniam.vercel.app",
+      signupRedirectURL: "https://e-commerce-amber-one.vercel.app",
       signupExpirationMinutes: 60,
     },
     oauthOptions: {
       providers: [{ type: "google" }],
-      loginRedirectURL: "e-commerce-b4f2toq0t-mainakkaniam.vercel.app",
+      loginRedirectURL: "https://e-commerce-amber-one.vercel.app",
       loginExpirationMinutes: 60,
-      signupRedirectURL: "e-commerce-b4f2toq0t-mainakkaniam.vercel.app",
+      signupRedirectURL: "https://e-commerce-amber-one.vercel.app",
       signupExpirationMinutes: 60,
     },
   };

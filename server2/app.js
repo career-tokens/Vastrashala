@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(
   cors({
-    origin: [ 'e-commerce-b4f2toq0t-mainakkaniam.vercel.app', 'https://vastra-backend-node.onrender.com'],
+    origin: [ 'https://e-commerce-amber-one.vercel.app', 'https://vastra-backend-node.onrender.com'],
   })
 )
 //stripe-ingg
