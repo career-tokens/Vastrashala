@@ -26,7 +26,7 @@ const AdminPanel = () => {
       for (const dataElement of data.data) {
         const elementId = dataElement._id;
         const bodyIds = dataElement.body;
-
+        if(bodyIds){
         const fetchedResponses = [];
         console.log("bodyIds: " + bodyIds);
         for (const bodyId of bodyIds) {
@@ -38,6 +38,7 @@ const AdminPanel = () => {
           _id: elementId,
           responses: fetchedResponses,
         });
+      }
       }
 
       setResultArray(processedData);
