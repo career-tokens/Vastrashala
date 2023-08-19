@@ -131,9 +131,9 @@ function Navbar() {
           columnGap="20px"
           zIndex="2"
         >
-          <IconButton sx={{ ...iconButtonStyle, "&:hover": { backgroundColor: "rgba(1, 5, 54, 0.8)" } }}>
+          {/**<IconButton sx={{ ...iconButtonStyle, "&:hover": { backgroundColor: "rgba(1, 5, 54, 0.8)" } }}>
             <SearchOutlined />
-          </IconButton>
+          </IconButton>*/}
           <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
   <IconButton
     sx={{
