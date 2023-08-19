@@ -31,7 +31,7 @@ const Login = () => {
     },
     oauthOptions: {
       providers: [{ type: "google" }],
-      loginRedirectURL: "http://localhost:3000",
+      loginRedirectURL: "https://e-commerce-amber-one.vercel.app",
       loginExpirationMinutes: 60,
       signupRedirectURL: "https://e-commerce-amber-one.vercel.app",
       signupExpirationMinutes: 60,
