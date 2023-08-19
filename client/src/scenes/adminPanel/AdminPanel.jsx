@@ -28,7 +28,7 @@ const AdminPanel = () => {
         const bodyIds = dataElement.body;
 
         const fetchedResponses = [];
-
+        console.log("bodyIds: " + bodyIds);
         for (const bodyId of bodyIds) {
           const response = await fetchItemsWithImages(bodyId);
           fetchedResponses.push(response);
@@ -48,7 +48,7 @@ const AdminPanel = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [resultArray]);
 
   return (
     <Box width="80%" m="20vh auto">
