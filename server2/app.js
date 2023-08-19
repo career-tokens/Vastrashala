@@ -28,8 +28,8 @@ app.post('/api/create-stripe-session', async (req, res) => {
         customer_email: email, // Set a default email or get it from the client-side
         mode: "payment",
         allow_promotion_codes: true,
-        success_url: "http://localhost:3000/checkout/success", // Adjust the URL accordingly
-        cancel_url: "http://localhost:3000", // Adjust the URL accordingly
+        success_url: "https://e-commerce-amber-one.vercel.app/checkout/success", // Adjust the URL accordingly
+        cancel_url: "https://e-commerce-amber-one.vercel.app", // Adjust the URL accordingly
         line_items: lineItems,
       });
   
