@@ -5,3 +5,5 @@ https://www.linkedin.com/posts/mainak-mukherjee-a502b4244_hi-connections-i-had-b
 # Links to view the project:
 i)https://vastra-backend-strapi.onrender.com (backend url but pls hit it and wait for the server to wake up , you know it when the page gets ready)
 <br/>ii)https://e-commerce-amber-one.vercel.app/  (after the server is awake now u can explore the frontend part )
+
+For fake payment , try fake card no.:4242 4242 4242 4242
